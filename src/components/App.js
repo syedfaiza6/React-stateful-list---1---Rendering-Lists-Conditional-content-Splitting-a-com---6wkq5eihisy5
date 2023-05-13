@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 
 import '../styles/App.css';
 
@@ -27,10 +27,29 @@ const data = {
   ]
 }
 const App = () => {
+  const showOutput = e => {
+    setYear(e.target.value)
+  };
+  const [year, setYear] = useState(null);
 
   return (
     <div id="main">
-      
+      <select onInput={showOutput}>
+      <option value={null}></option>
+<option value={'2018'}>2018</option>
+<option value={'2019'}>2019</option>
+<option value={'2020'}>2020</option>
+<option value={'2021'}>2021</option>
+<option value={'2022'}>2022</option>
+      </select>
+      <div id="selected-year">
+				{!year ? 'No year selected' : <div>Selected year-{year}</div>}
+			</div>
+			<ul>
+				{data[year]?.map(el => (
+					<li>{el}</li>
+				))}
+			</ul>
     </div>
   )
 }
